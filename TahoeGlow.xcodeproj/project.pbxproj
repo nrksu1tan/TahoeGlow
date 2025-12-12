@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		B041B4862EECC5D7000661F8 /* EdgeLight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EdgeLight.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B041B4862EECC5D7000661F8 /* TahoeGlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TahoeGlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		B041B4882EECC5D7000661F8 /* EdgeLight */ = {
+		B041B4882EECC5D7000661F8 /* TahoeGlow */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = EdgeLight;
+			path = TahoeGlow;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,7 +32,7 @@
 		B041B47D2EECC5D7000661F8 = {
 			isa = PBXGroup;
 			children = (
-				B041B4882EECC5D7000661F8 /* EdgeLight */,
+				B041B4882EECC5D7000661F8 /* TahoeGlow */,
 				B041B4872EECC5D7000661F8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -40,7 +40,7 @@
 		B041B4872EECC5D7000661F8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B041B4862EECC5D7000661F8 /* EdgeLight.app */,
+				B041B4862EECC5D7000661F8 /* TahoeGlow.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B041B4852EECC5D7000661F8 /* EdgeLight */ = {
+		B041B4852EECC5D7000661F8 /* TahoeGlow */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B041B4912EECC5DB000661F8 /* Build configuration list for PBXNativeTarget "EdgeLight" */;
+			buildConfigurationList = B041B4912EECC5DB000661F8 /* Build configuration list for PBXNativeTarget "TahoeGlow" */;
 			buildPhases = (
 				B041B4822EECC5D7000661F8 /* Sources */,
 				B041B4832EECC5D7000661F8 /* Frameworks */,
@@ -61,13 +61,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				B041B4882EECC5D7000661F8 /* EdgeLight */,
+				B041B4882EECC5D7000661F8 /* TahoeGlow */,
 			);
-			name = EdgeLight;
+			name = TahoeGlow;
 			packageProductDependencies = (
 			);
 			productName = EdgeLight;
-			productReference = B041B4862EECC5D7000661F8 /* EdgeLight.app */;
+			productReference = B041B4862EECC5D7000661F8 /* TahoeGlow.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B041B4812EECC5D7000661F8 /* Build configuration list for PBXProject "EdgeLight" */;
+			buildConfigurationList = B041B4812EECC5D7000661F8 /* Build configuration list for PBXProject "TahoeGlow" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -99,7 +99,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B041B4852EECC5D7000661F8 /* EdgeLight */,
+				B041B4852EECC5D7000661F8 /* TahoeGlow */,
 			);
 		};
 /* End PBXProject section */
@@ -248,6 +248,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -255,13 +256,16 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = TahoeGlow;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xrdgroup.EdgeLight;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xrdgroup.TahoeGlow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -278,6 +282,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -285,13 +290,16 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = TahoeGlow;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xrdgroup.EdgeLight;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xrdgroup.TahoeGlow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -306,7 +314,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B041B4812EECC5D7000661F8 /* Build configuration list for PBXProject "EdgeLight" */ = {
+		B041B4812EECC5D7000661F8 /* Build configuration list for PBXProject "TahoeGlow" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B041B48F2EECC5DB000661F8 /* Debug */,
@@ -315,7 +323,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B041B4912EECC5DB000661F8 /* Build configuration list for PBXNativeTarget "EdgeLight" */ = {
+		B041B4912EECC5DB000661F8 /* Build configuration list for PBXNativeTarget "TahoeGlow" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B041B4922EECC5DB000661F8 /* Debug */,
