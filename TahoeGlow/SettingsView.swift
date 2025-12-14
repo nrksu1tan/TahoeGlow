@@ -9,7 +9,7 @@ struct SettingsView: View {
                 .font(.system(size: 20, weight: .bold, design: .rounded))
                 .padding(.top)
             
-            // Section 1: Presets
+
             VStack(alignment: .leading, spacing: 10) {
                 Text("Quick Presets")
                     .font(.caption).bold().foregroundColor(.gray)
@@ -40,7 +40,7 @@ struct SettingsView: View {
             
             Divider()
             
-            // Section 2: Customization
+
             VStack(spacing: 15) {
                 ColorPicker("Custom Color", selection: $appState.borderColor)
                 
@@ -51,7 +51,7 @@ struct SettingsView: View {
                         Text("\(Int(appState.borderWidth))")
                             .foregroundColor(.secondary)
                     }
-                    // Увеличил максимум до 120
+
                     Slider(value: $appState.borderWidth, in: 10...300) {
                         Text("Width")
                     } minimumValueLabel: {
@@ -65,17 +65,16 @@ struct SettingsView: View {
             
             Spacer()
             
-            // --- ОБНОВЛЕННЫЙ ПОДВАЛ ---
+
                         HStack(spacing: 4) {
                             Text("Made with ❤️ by")
                             
-                            // Ссылка на GitHub
                             Link("nrksu1tan", destination: URL(string: "https://github.com/nrksu1tan")!)
-                                .fontWeight(.bold) // Жирный шрифт
-                                .underline(false) // Без подчеркивания (или true, если хочешь)
-                                .foregroundColor(.primary) // Цвет текста системы
+                                .fontWeight(.bold) 
+                                .underline(false) 
+                                .foregroundColor(.primary) 
                                 .onHover { isHovered in
-                                    // Меняем курсор на "руку" при наведении
+
                                     if isHovered { NSCursor.pointingHand.push() } else { NSCursor.pop() }
                                 }
                         }

@@ -4,21 +4,18 @@ import Combine
 struct LightPreset: Identifiable {
     let id = UUID()
     let name: String
-    let color: String // Hex
+    let color: String 
 }
 
 class AppState: ObservableObject {
     static let shared = AppState()
     
-    // Настройки
-    @AppStorage("borderColor") var savedColorStr: String = "#FFD28E" // Warm по умолчанию
+    @AppStorage("borderColor") var savedColorStr: String = "#FFD28E" 
     @AppStorage("borderWidth") var borderWidth: Double = 25.0
     
-    // Состояние (Свет всегда включен по умолчанию)
     @Published var isLightOn: Bool = true
     @Published var mousePosition: CGPoint = .zero
     
-    // Пресеты
     let presets: [LightPreset] = [
         LightPreset(name: "Warm", color: "#FFD28E"),
         LightPreset(name: "Cool", color: "#E0F7FA"),
@@ -33,7 +30,7 @@ class AppState: ObservableObject {
     }
 }
 
-// Утилита для цвета
+
 extension Color {
     init?(hex: String) {
         var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "#", with: "")
