@@ -1,46 +1,65 @@
 import SwiftUI
 import AppKit
+import Combine
 
 @main
 struct EdgeLightApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     var body: some Scene {
-        // Стандартная сцена настроек macOS.
-        // Она автоматически привязывается к меню "Settings..." и Cmd+,
         Settings {
             SettingsView()
         }
     }
 }
 
-class AppDelegate: NSObject, NSApplicationDelegate {
-    var overlayWindow: NSWindow!
-
-    func applicationDidFinishLaunching(_ notification: Notification) {
-        setupOverlayWindow()
+class WindowManager: ObservableObject {
+    var overlayWindow: NSWindow?
+    private var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        NotificationCenter.default.publisher(for: NSApplication.didChangeScreenParametersNotification)
+            .sink { [weak self] _ in
+                self?.setupWindow()
+            }
+            .store(in: &cancellables)
+            
+        setupWindow()
     }
     
-    func setupOverlayWindow() {
-        guard let screen = NSScreen.main else { return }
+    func setupWindow() {
+        overlayWindow?.close()
+        overlayWindow = nil
         
-        let contentRect = screen.visibleFrame
+        guard let mainScreen = NSScreen.main else { return }
+        let frame = mainScreen.visibleFrame
         
-        overlayWindow = NSWindow(
-            contentRect: contentRect,
+        let window = NSWindow(
+            contentRect: frame,
             styleMask: [.borderless],
             backing: .buffered,
             defer: false
         )
         
-        overlayWindow.isOpaque = false
-        overlayWindow.backgroundColor = .clear
-        overlayWindow.level = .floating
-        overlayWindow.collectionBehavior = [.canJoinAllSpaces, .stationary, .ignoresCycle]
-        overlayWindow.ignoresMouseEvents = true
+        window.isOpaque = false
+        window.backgroundColor = .clear
+        window.level = .floating
+        window.collectionBehavior = [.canJoinAllSpaces, .stationary, .ignoresCycle]
+        window.ignoresMouseEvents = true
         
-        overlayWindow.contentView = NSHostingView(rootView: OverlayView())
+        window.contentView = NSHostingView(rootView: OverlayView(windowFrame: frame))
         
-        overlayWindow.orderFront(nil)
+        window.setFrame(frame, display: true)
+        window.orderFront(nil)
+        
+        self.overlayWindow = window
+    }
+}
+
+class AppDelegate: NSObject, NSApplicationDelegate {
+    var windowManager: WindowManager!
+
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        windowManager = WindowManager()
     }
 }

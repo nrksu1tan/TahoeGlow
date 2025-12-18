@@ -3,105 +3,64 @@ import Combine
 
 struct OverlayView: View {
     @ObservedObject var appState = AppState.shared
+    var windowFrame: CGRect
     
 
-    let holeRadius: CGFloat = 180.0
-    let coreRadius: CGFloat = 40.0
+    @State private var localMousePos: CGPoint = .zero
+    
+    // Конфиг дырки
+    let holeSize: CGSize = CGSize(width: 450, height: 280)
+    let holeBlur: CGFloat = 80.0
+    
+
+    let moveThreshold: CGFloat = 4.0
     
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 if appState.isLightOn {
-                    LightBodyView(borderColor: appState.borderColor, borderWidth: appState.borderWidth)
+                    RoundedRectangle(cornerRadius: appState.cornerRadius)
+                        .strokeBorder(appState.activeColor, lineWidth: appState.borderWidth)
+                        .background(Color.clear)
+                        .blur(radius: 2)
+                        .padding(20)
                         .mask(
-                            MouseMaskView(
-                                mousePos: appState.mousePosition,
-                                screenSize: geometry.size,
-                                holeRadius: holeRadius,
-                                coreRadius: coreRadius
-                            )
+                            ZStack {
+                                Color.black
+                                
+
+                                RoundedRectangle(cornerRadius: 50)
+                                    .frame(width: holeSize.width, height: holeSize.height)
+                                    .position(localMousePos)
+                                    .blur(radius: holeBlur)
+                                    .blendMode(.destinationOut)
+                            }
+                            .compositingGroup()
+                            .drawingGroup() // Metal rendering
                         )
                 }
             }
-            .animation(.easeInOut(duration: 0.3), value: appState.isLightOn)
+            .animation(.linear(duration: 0.15), value: appState.isLightOn)
+            .animation(.easeInOut(duration: 0.2), value: appState.activeColor)
         }
         .edgesIgnoringSafeArea(.all)
         .onReceive(Timer.publish(every: 0.016, on: .main, in: .common).autoconnect()) { _ in
-            updateMouseLocation()
+            updateMouseLocal()
         }
     }
     
-    private func updateMouseLocation() {
+    private func updateMouseLocal() {
         let globalMouse = NSEvent.mouseLocation
-        guard let window = NSApp.windows.first(where: { $0.level == .floating }) else { return }
-        let windowFrame = window.frame
         
         let localX = globalMouse.x - windowFrame.minX
         let localY = windowFrame.height - (globalMouse.y - windowFrame.minY)
         
-        appState.mousePosition = CGPoint(x: localX, y: localY)
-    }
-}
 
-struct LightBodyView: View {
-    var borderColor: Color
-    var borderWidth: CGFloat
-    
-    var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 32)
-                .stroke(borderColor.opacity(0.25), lineWidth: borderWidth + 60)
-                .blur(radius: 50)
-            
-            RoundedRectangle(cornerRadius: 32)
-                .stroke(borderColor.opacity(0.7), lineWidth: borderWidth + 10)
-                .blur(radius: 20)
-            
-            RoundedRectangle(cornerRadius: 32)
-                .stroke(Color.white.opacity(0.95), lineWidth: borderWidth * 0.3)
-                .blur(radius: 6)
-                .shadow(color: borderColor, radius: 10)
-        }
-        .padding(25)
-    }
-}
-
-
-struct MouseMaskView: View {
-    var mousePos: CGPoint
-    var screenSize: CGSize
-    var holeRadius: CGFloat
-    var coreRadius: CGFloat
-    
-    var body: some View {
-        Canvas { context, size in
-
-            context.fill(Path(CGRect(origin: .zero, size: size)), with: .color(.black))
-            
-
-            context.blendMode = .destinationOut
-            
-            let rect = CGRect(
-                x: mousePos.x - holeRadius,
-                y: mousePos.y - holeRadius,
-                width: holeRadius * 2,
-                height: holeRadius * 2
-            )
-            
-            context.fill(
-                Path(ellipseIn: rect),
-                with: .radialGradient(
-                    Gradient(stops: [
-                        .init(color: .black, location: 0.0),
-                        .init(color: .black, location: coreRadius / holeRadius),
-                        .init(color: .black.opacity(0.5), location: 0.6),
-                        .init(color: .clear, location: 1.0)
-                    ]),
-                    center: mousePos, // <--- ИСПРАВЛЕНО: Было .center, стало mousePos
-                    startRadius: 0,
-                    endRadius: holeRadius
-                )
-            )
+        let diffX = abs(localX - localMousePos.x)
+        let diffY = abs(localY - localMousePos.y)
+        
+        if diffX > moveThreshold || diffY > moveThreshold {
+            self.localMousePos = CGPoint(x: localX, y: localY)
         }
     }
 }
