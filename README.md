@@ -5,6 +5,12 @@
 
 ![Platform](https://img.shields.io/badge/macOS-13.5%2B-black?logo=apple) ![Swift](https://img.shields.io/badge/Language-SwiftUI-orange?logo=swift) ![License](https://img.shields.io/badge/license-MIT-blue)
 
+## 📸 Screenshots
+
+| Preview | Settings & Preview |
+| :---: | :---: |
+| ![Preview 1](https://github.com/nrksu1tan/TahoeGlow/blob/main/22.png?raw=true) | ![Preview 2](https://github.com/nrksu1tan/TahoeGlow/blob/main/11.png?raw=true) |
+
 ## ✨ Features
 
 * **Native Performance:** Built with Swift & SwiftUI. Zero lag.
