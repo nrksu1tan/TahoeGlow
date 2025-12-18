@@ -7,7 +7,7 @@
 
 ## 📸 Screenshots
 
-| Desktop View | Settings & Presets |
+| Preview | Settings & Preview |
 | :---: | :---: |
 | ![Preview 1](https://github.com/nrksu1tan/TahoeGlow/blob/main/22.png?raw=true) | ![Preview 2](https://github.com/nrksu1tan/TahoeGlow/blob/main/11.png?raw=true) |
 
